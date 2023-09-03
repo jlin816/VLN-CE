@@ -6,20 +6,20 @@ import habitat_sim
 import numpy as np
 import quaternion
 import torch
-from habitat.core.simulator import Simulator
-from habitat.core.utils import try_cv2_import
-from habitat.tasks.utils import cartesian_to_polar
-from habitat.utils.geometry_utils import (
+from habitat_lab.habitat.core.simulator import Simulator
+from habitat_lab.habitat.core.utils import try_cv2_import
+from habitat_lab.habitat.tasks.utils import cartesian_to_polar
+from habitat_lab.habitat.utils.geometry_utils import (
     quaternion_rotate_vector,
     quaternion_to_list,
 )
-from habitat.utils.visualizations import maps as habitat_maps
-from habitat.utils.visualizations.utils import images_to_video
-from habitat_baselines.common.tensorboard_utils import TensorboardWriter
+from habitat_lab.habitat.utils.visualizations import maps as habitat_maps
+from habitat_lab.habitat.utils.visualizations.utils import images_to_video
+from habitat_lab.habitat_baselines.common.tensorboard_utils import TensorboardWriter
 from numpy import ndarray
 from torch import Tensor
 
-from habitat_extensions import maps
+from VLN_CE.habitat_extensions import maps
 
 cv2 = try_cv2_import()
 

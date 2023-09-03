@@ -4,13 +4,13 @@ import os
 from typing import Dict, List, Optional, Union
 
 import attr
-from habitat.config import Config
-from habitat.core.dataset import ALL_SCENES_MASK, Dataset
-from habitat.core.registry import registry
-from habitat.core.utils import not_none_validator
-from habitat.datasets.utils import VocabDict
-from habitat.tasks.nav.nav import NavigationGoal
-from habitat.tasks.vln.vln import InstructionData, VLNEpisode
+from habitat_lab.habitat.config import Config
+from habitat_lab.habitat.core.dataset import ALL_SCENES_MASK, Dataset
+from habitat_lab.habitat.core.registry import registry
+from habitat_lab.habitat.core.utils import not_none_validator
+from habitat_lab.habitat.datasets.utils import VocabDict
+from habitat_lab.habitat.tasks.nav.nav import NavigationGoal
+from habitat_lab.habitat.tasks.vln.vln import InstructionData, VLNEpisode
 
 DEFAULT_SCENE_PATH_PREFIX = "data/scene_datasets/"
 ALL_LANGUAGES_MASK = "*"
@@ -38,7 +38,8 @@ class VLNExtendedEpisode(VLNEpisode):
     reference_path: Optional[List[List[float]]] = attr.ib(default=None)
     instruction: ExtendedInstructionData = attr.ib(
         default=None, validator=not_none_validator
-    )
+    ),
+    descriptions: Optional[List[str]] = attr.ib(default=None)
     trajectory_id: Optional[Union[int, str]] = attr.ib(default=None)
 
 

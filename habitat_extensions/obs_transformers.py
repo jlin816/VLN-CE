@@ -5,12 +5,12 @@ from typing import Dict, List, Sequence, Tuple, Union
 import numpy as np
 import torch
 from gym import Space, spaces
-from habitat.config import Config
-from habitat.core.logging import logger
-from habitat.core.simulator import Observations
-from habitat_baselines.common.baseline_registry import baseline_registry
-from habitat_baselines.common.obs_transformers import ObservationTransformer
-from habitat_baselines.utils.common import (
+from habitat_lab.habitat.config import Config
+from habitat_lab.habitat.core.logging import logger
+from habitat_lab.habitat.core.simulator import Observations
+from habitat_lab.habitat_baselines.common.baseline_registry import baseline_registry
+from habitat_lab.habitat_baselines.common.obs_transformers import ObservationTransformer
+from habitat_lab.habitat_baselines.utils.common import (
     center_crop,
     get_image_height_width,
     overwrite_gym_box_shape,

@@ -1,7 +1,7 @@
 from typing import List, Tuple
 
 import numpy as np
-from habitat.sims.habitat_simulator.actions import HabitatSimActions
+from habitat_lab.habitat.sims.habitat_simulator.actions import HabitatSimActions
 from numpy import ndarray
 
 

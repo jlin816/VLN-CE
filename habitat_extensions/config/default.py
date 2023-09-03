@@ -1,7 +1,7 @@
 from typing import List, Optional, Union
-
-from habitat.config.default import Config as CN
-from habitat.config.default import get_config
+import os
+from habitat_lab.habitat.config.default import Config as CN
+from habitat_lab.habitat.config.default import get_config
 
 _C = get_config()
 _C.defrost()
@@ -69,6 +69,15 @@ _C.TASK.NDTW.GT_PATH = (
 )
 _C.TASK.NDTW.SUCCESS_DISTANCE = 3.0
 # ----------------------------------------------------------------------------
+# GT_ACTIONS MEASUREMENT
+# ----------------------------------------------------------------------------
+_C.TASK.GT_ACTIONS = CN()
+_C.TASK.GT_ACTIONS.TYPE = "GTActions"
+_C.TASK.GT_ACTIONS.SPLIT = "val_seen"
+_C.TASK.GT_ACTIONS.GT_PATH = (
+    "data/datasets/R2R_VLNCE_v1-3_preprocessed/{split}/{split}_gt.json.gz"
+)
+# ----------------------------------------------------------------------------
 # SDTW MEASUREMENT
 # ----------------------------------------------------------------------------
 _C.TASK.SDTW = CN()
@@ -123,10 +132,10 @@ _C.TASK.TOP_DOWN_MAP_VLNCE.FOG_OF_WAR.VISIBILITY_DIST = 5.0
 _C.TASK.WAYPOINT_REWARD_MEASURE = CN()
 _C.TASK.WAYPOINT_REWARD_MEASURE.TYPE = "WaypointRewardMeasure"
 _C.TASK.WAYPOINT_REWARD_MEASURE.use_distance_scaled_slack_reward = True
-_C.TASK.WAYPOINT_REWARD_MEASURE.scale_slack_on_prediction = True
-_C.TASK.WAYPOINT_REWARD_MEASURE.success_reward = 2.5
+_C.TASK.WAYPOINT_REWARD_MEASURE.scale_slack_on_prediction = False
+_C.TASK.WAYPOINT_REWARD_MEASURE.success_reward = 100
 _C.TASK.WAYPOINT_REWARD_MEASURE.distance_scalar = 1.0
-_C.TASK.WAYPOINT_REWARD_MEASURE.slack_reward = -0.05
+_C.TASK.WAYPOINT_REWARD_MEASURE.slack_reward = 0# -0.05
 # ----------------------------------------------------------------------------
 # DATASET EXTENSIONS
 # ----------------------------------------------------------------------------
@@ -159,7 +168,6 @@ def get_extended_config(
 
         for config_path in config_paths:
             config.merge_from_file(config_path)
-
     if opts:
         config.merge_from_list(opts)
 

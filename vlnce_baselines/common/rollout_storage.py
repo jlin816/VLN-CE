@@ -3,8 +3,8 @@ from typing import DefaultDict, Dict, Iterator, Tuple
 
 import torch
 from gym import Space
-from habitat.core.simulator import Observations
-from habitat_baselines.common.rollout_storage import RolloutStorage
+from habitat_lab.habitat.core.simulator import Observations
+from habitat_lab.habitat_baselines.common.rollout_storage import RolloutStorage
 from torch import Tensor
 
 

@@ -1,17 +1,48 @@
 # uses a discrete navigator (DN) for zero-shot evaluation of waypoint models.
 
 ENV_NAME: VLNCEWaypointEnvDiscretized
-TASK_CONFIG:
-  ENVIRONMENT:
-    MAX_EPISODE_STEPS: 500
-  TASK:
-    POSSIBLE_ACTIONS: [STOP, MOVE_FORWARD, TURN_LEFT, TURN_RIGHT]
-    MEASUREMENTS: [
-      DISTANCE_TO_GOAL,
-      SUCCESS,
-      SPL,
-      NDTW,
-      PATH_LENGTH,
-      ORACLE_SUCCESS,
-      STEPS_TAKEN,
-    ]
+ENVIRONMENT:
+  MAX_EPISODE_STEPS: 200
+TASK:
+  TYPE: VLN-v0
+  SUCCESS_DISTANCE: 3.0
+  SENSORS: [
+    INSTRUCTION_SENSOR,
+    GLOBAL_GPS_SENSOR,
+    HEADING_SENSOR,
+    PANO_ANGLE_FEATURE_SENSOR,
+  ]
+  INSTRUCTION_SENSOR_UUID: instruction
+  POSSIBLE_ACTIONS: [STOP, MOVE_FORWARD, TURN_LEFT, TURN_RIGHT]
+  MEASUREMENTS: [
+    DISTANCE_TO_GOAL,
+    SUCCESS,
+    SPL,
+    NDTW,
+    PATH_LENGTH,
+    ORACLE_SUCCESS,
+    STEPS_TAKEN,
+    WAYPOINT_REWARD_MEASURE,
+  ]
+  GLOBAL_GPS_SENSOR:
+    DIMENSIONALITY: 2
+  TOP_DOWN_MAP_VLNCE:
+    DRAW_SHORTEST_PATH: True
+    DRAW_REFERENCE_PATH: True
+    DRAW_FIXED_WAYPOINTS: True
+    DRAW_MP3D_AGENT_PATH: False
+    FOG_OF_WAR:
+      DRAW: True
+      FOV: 360
+  SUCCESS:
+    SUCCESS_DISTANCE: 3.0
+  SPL:
+    SUCCESS_DISTANCE: 3.0
+  NDTW:
+    GT_PATH: ../../../VLN_CE/data/datasets/R2R_VLNCE_v1-3_preprocessed/{split}/{split}_gt.json.gz
+DATASET:
+  TYPE: VLN-CE-v1
+  SPLIT: train
+  DATA_PATH: ../../../VLN_CE/data/datasets/R2R_VLNCE_v1-3_preprocessed/{split}/{split}.json.gz
+  SCENES_DIR: ../../../VLN_CE/data/scene_datasets/
+

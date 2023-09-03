@@ -9,19 +9,19 @@ import msgpack_numpy
 import numpy as np
 import torch
 import tqdm
-from habitat import logger
-from habitat_baselines.common.baseline_registry import baseline_registry
-from habitat_baselines.common.environments import get_env_class
-from habitat_baselines.common.obs_transformers import (
+from habitat_lab.habitat import logger
+from habitat_lab.habitat_baselines.common.baseline_registry import baseline_registry
+from habitat_lab.habitat_baselines.common.environments import get_env_class
+from habitat_lab.habitat_baselines.common.obs_transformers import (
     apply_obs_transforms_batch,
 )
-from habitat_baselines.common.tensorboard_utils import TensorboardWriter
-from habitat_baselines.utils.common import batch_obs
+from habitat_lab.habitat_baselines.common.tensorboard_utils import TensorboardWriter
+from habitat_lab.habitat_baselines.utils.common import batch_obs
 
-from vlnce_baselines.common.aux_losses import AuxLosses
-from vlnce_baselines.common.base_il_trainer import BaseVLNCETrainer
-from vlnce_baselines.common.env_utils import construct_envs
-from vlnce_baselines.common.utils import extract_instruction_tokens
+from VLN_CE.vlnce_baselines.common.aux_losses import AuxLosses
+from VLN_CE.vlnce_baselines.common.base_il_trainer import BaseVLNCETrainer
+from VLN_CE.vlnce_baselines.common.env_utils import construct_envs
+from VLN_CE.vlnce_baselines.common.utils import extract_instruction_tokens
 
 with warnings.catch_warnings():
     warnings.filterwarnings("ignore", category=FutureWarning)

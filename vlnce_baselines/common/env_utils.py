@@ -1,11 +1,16 @@
 import random
 from typing import List, Optional, Type, Union
 
-import habitat
-from habitat import Config, Env, RLEnv, VectorEnv, make_dataset
-from habitat.core.dataset import ALL_SCENES_MASK
-from habitat_baselines.utils.env_utils import make_env_fn
+from habitat_lab import habitat
+from habitat_lab.habitat import Config, Env, RLEnv, VectorEnv, make_dataset
+from habitat_lab.habitat.core.dataset import ALL_SCENES_MASK
+from habitat_lab.habitat_baselines.utils.env_utils import make_env_fn
 
+def construct_env(
+    config: Config,
+    env_class: Type[Union[Env, RLEnv]],
+) -> Env:
+    return make_env_fn(config, env_class)
 
 def construct_envs(
     config: Config,

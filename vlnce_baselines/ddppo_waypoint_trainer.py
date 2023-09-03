@@ -11,17 +11,17 @@ import numpy as np
 import torch
 import tqdm
 from gym import Space, spaces
-from habitat import Config, logger
-from habitat.core.vector_env import VectorEnv
-from habitat_baselines.common.baseline_registry import baseline_registry
-from habitat_baselines.common.environments import get_env_class
-from habitat_baselines.common.obs_transformers import (
+from habitat_lab.habitat import Config, logger
+from habitat_lab.habitat.core.vector_env import VectorEnv
+from habitat_lab.habitat_baselines.common.baseline_registry import baseline_registry
+from habitat_lab.habitat_baselines.common.environments import get_env_class
+from habitat_lab.habitat_baselines.common.obs_transformers import (
     apply_obs_transforms_batch,
     apply_obs_transforms_obs_space,
     get_active_obs_transforms,
 )
-from habitat_baselines.common.tensorboard_utils import TensorboardWriter
-from habitat_baselines.rl.ddppo.algo.ddp_utils import (
+from habitat_lab.habitat_baselines.common.tensorboard_utils import TensorboardWriter
+from habitat_lab.habitat_baselines.rl.ddppo.algo.ddp_utils import (
     EXIT,
     REQUEUE,
     add_signal_handlers,
@@ -30,25 +30,25 @@ from habitat_baselines.rl.ddppo.algo.ddp_utils import (
     requeue_job,
     save_interrupted_state,
 )
-from habitat_baselines.rl.ppo.ppo_trainer import PPOTrainer
-from habitat_baselines.utils.common import batch_obs, linear_decay
+from habitat_lab.habitat_baselines.rl.ppo.ppo_trainer import PPOTrainer
+from habitat_lab.habitat_baselines.utils.common import batch_obs, linear_decay
 from torch import Tensor
 from torch import distributed as distrib
 from torch import nn as nn
 from torch.optim.lr_scheduler import LambdaLR
 
-from habitat_extensions.utils import (
+from VLN_CE.habitat_extensions.utils import (
     generate_video,
     waypoint_observations_to_image,
 )
-from vlnce_baselines.common.ddppo_alg import WDDPPO
-from vlnce_baselines.common.env_utils import (
+from VLN_CE.vlnce_baselines.common.ddppo_alg import WDDPPO
+from VLN_CE.vlnce_baselines.common.env_utils import (
     construct_envs,
     construct_envs_auto_reset_false,
 )
-from vlnce_baselines.common.rollout_storage import ActionDictRolloutStorage
-from vlnce_baselines.common.utils import extract_instruction_tokens
-from vlnce_baselines.config.default import add_pano_sensors_to_config
+from VLN_CE.vlnce_baselines.common.rollout_storage import ActionDictRolloutStorage
+from VLN_CE.vlnce_baselines.common.utils import extract_instruction_tokens
+from VLN_CE.vlnce_baselines.config.default import add_pano_sensors_to_config
 
 
 @baseline_registry.register_trainer(name="ddppo-waypoint")

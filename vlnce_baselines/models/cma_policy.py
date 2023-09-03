@@ -5,20 +5,20 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from gym import Space
-from habitat import Config
-from habitat_baselines.common.baseline_registry import baseline_registry
-from habitat_baselines.rl.models.rnn_state_encoder import (
+from habitat_lab.habitat import Config
+from habitat_lab.habitat_baselines.common.baseline_registry import baseline_registry
+from habitat_lab.habitat_baselines.rl.models.rnn_state_encoder import (
     build_rnn_state_encoder,
 )
-from habitat_baselines.rl.ppo.policy import Net
+from habitat_lab.habitat_baselines.rl.ppo.policy import Net
 from torch import Tensor
 
-from vlnce_baselines.common.aux_losses import AuxLosses
-from vlnce_baselines.models.encoders import resnet_encoders
-from vlnce_baselines.models.encoders.instruction_encoder import (
+from VLN_CE.vlnce_baselines.common.aux_losses import AuxLosses
+from VLN_CE.vlnce_baselines.models.encoders import resnet_encoders
+from VLN_CE.vlnce_baselines.models.encoders.instruction_encoder import (
     InstructionEncoder,
 )
-from vlnce_baselines.models.policy import ILPolicy
+from VLN_CE.vlnce_baselines.models.policy import ILPolicy
 
 
 @baseline_registry.register_policy

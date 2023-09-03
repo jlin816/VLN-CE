@@ -1,10 +1,10 @@
 import abc
 from typing import Any
 
-from habitat_baselines.rl.ppo.policy import Policy
-from habitat_baselines.utils.common import CategoricalNet
+from habitat_lab.habitat_baselines.rl.ppo.policy import Policy
+from habitat_lab.habitat_baselines.utils.common import CategoricalNet
 
-from vlnce_baselines.models.utils import CustomFixedCategorical
+from VLN_CE.vlnce_baselines.models.utils import CustomFixedCategorical
 
 
 class ILPolicy(Policy, metaclass=abc.ABCMeta):

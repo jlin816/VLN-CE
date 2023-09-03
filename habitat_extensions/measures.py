@@ -6,22 +6,22 @@ from typing import Any, List, Union
 import numpy as np
 from dtw import dtw
 from fastdtw import fastdtw
-from habitat.config import Config
-from habitat.core.dataset import Episode
-from habitat.core.embodied_task import Action, EmbodiedTask, Measure
-from habitat.core.logging import logger
-from habitat.core.registry import registry
-from habitat.core.simulator import Simulator
-from habitat.core.utils import try_cv2_import
-from habitat.tasks.nav.nav import DistanceToGoal, Success
-from habitat.tasks.utils import cartesian_to_polar
-from habitat.utils.geometry_utils import quaternion_rotate_vector
-from habitat.utils.visualizations import fog_of_war
-from habitat.utils.visualizations import maps as habitat_maps
+from habitat_lab.habitat.config import Config
+from habitat_lab.habitat.core.dataset import Episode
+from habitat_lab.habitat.core.embodied_task import Action, EmbodiedTask, Measure
+from habitat_lab.habitat.core.logging import logger
+from habitat_lab.habitat.core.registry import registry
+from habitat_lab.habitat.core.simulator import Simulator
+from habitat_lab.habitat.core.utils import try_cv2_import
+from habitat_lab.habitat.tasks.nav.nav import DistanceToGoal, Success
+from habitat_lab.habitat.tasks.utils import cartesian_to_polar
+from habitat_lab.habitat.utils.geometry_utils import quaternion_rotate_vector
+from habitat_lab.habitat.utils.visualizations import fog_of_war
+from habitat_lab.habitat.utils.visualizations import maps as habitat_maps
 from numpy import ndarray
 
-from habitat_extensions import maps
-from habitat_extensions.task import RxRVLNCEDatasetV1
+from VLN_CE.habitat_extensions import maps
+from VLN_CE.habitat_extensions.task import RxRVLNCEDatasetV1
 
 cv2 = try_cv2_import()
 
@@ -289,6 +289,45 @@ class NDTW(Measure):
             / (len(self.gt_locations) * self._config.SUCCESS_DISTANCE)
         )
         self._metric = nDTW
+
+
+@registry.register_measure
+class GTActions(Measure):
+    """GT actions
+    """
+
+    cls_uuid: str = "gt_actions"
+
+    def __init__(
+        self, *args: Any, sim: Simulator, config: Config, **kwargs: Any
+    ):
+        self._sim = sim
+        self._config = config
+
+        if "{role}" in config.GT_PATH:
+            self.gt_json = {}
+            for role in RxRVLNCEDatasetV1.annotation_roles:
+                with gzip.open(
+                    config.GT_PATH.format(split=config.SPLIT, role=role), "rt"
+                ) as f:
+                    self.gt_json.update(json.load(f))
+        else:
+            with gzip.open(
+                config.GT_PATH.format(split=config.SPLIT), "rt"
+            ) as f:
+                self.gt_json = json.load(f)
+
+        super().__init__()
+
+    def _get_uuid(self, *args: Any, **kwargs: Any) -> str:
+        return self.cls_uuid
+
+    def reset_metric(self, *args: Any, episode, **kwargs: Any):
+        self.gt_actions = self.gt_json[episode.episode_id]["actions"]
+        self.update_metric()
+
+    def update_metric(self, *args: Any, **kwargs: Any):
+        self._metric = self.gt_actions
 
 
 @registry.register_measure

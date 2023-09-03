@@ -1,5 +1,9 @@
 ENVIRONMENT:
   MAX_EPISODE_STEPS: 500
+  ITERATOR_OPTIONS:
+    SHUFFLE: True
+    CYCLE: True
+    SEED: 0
 SIMULATOR:
   ACTION_SPACE_CONFIG: v0
   AGENT_0:
@@ -10,8 +14,8 @@ SIMULATOR:
     GPU_DEVICE_ID: 0
     ALLOW_SLIDING: True
   RGB_SENSOR:
-    WIDTH: 224
-    HEIGHT: 224
+    WIDTH: 256
+    HEIGHT: 256
     HFOV: 90
     TYPE: HabitatSimRGBSensor
   DEPTH_SENSOR:
@@ -22,6 +26,7 @@ TASK:
   SUCCESS_DISTANCE: 3.0
   SENSORS: [
     INSTRUCTION_SENSOR,
+    DESCRIPTION_SENSOR,
     SHORTEST_PATH_SENSOR,
     VLN_ORACLE_PROGRESS_SENSOR
   ]
@@ -34,16 +39,19 @@ TASK:
     NDTW,
     PATH_LENGTH,
     ORACLE_SUCCESS,
-    STEPS_TAKEN
+    STEPS_TAKEN,
+    WAYPOINT_REWARD_MEASURE,
   ]
   SUCCESS:
     SUCCESS_DISTANCE: 3.0
   SPL:
     SUCCESS_DISTANCE: 3.0
   NDTW:
-    GT_PATH: data/datasets/R2R_VLNCE_v1-3_preprocessed/{split}/{split}_gt.json.gz
+    GT_PATH: VLN_CE/data/datasets/R2R_VLNCE_v1-3_preprocessed/{split}/{split}_gt.json.gz
+  GT_ACTIONS:
+    GT_PATH: VLN_CE/data/datasets/R2R_VLNCE_v1-3_preprocessed/{split}/{split}_gt.json.gz
 DATASET:
   TYPE: VLN-CE-v1
   SPLIT: train
-  DATA_PATH: data/datasets/R2R_VLNCE_v1-3_preprocessed/{split}/{split}.json.gz
-  SCENES_DIR: data/scene_datasets/
+  DATA_PATH: VLN_CE/data/datasets/R2R_VLNCE_v1-3_preprocessed/{split}/{split}.json.gz
+  SCENES_DIR: VLN_CE/data/scene_datasets/

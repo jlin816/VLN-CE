@@ -1,12 +1,12 @@
 from copy import deepcopy
 from typing import List, Optional, Union
 
-import habitat_baselines.config.default
+import habitat_lab.habitat_baselines.config.default
 import numpy as np
-from habitat.config.default import CONFIG_FILE_SEPARATOR
-from habitat.config.default import Config as CN
+from habitat_lab.habitat.config.default import CONFIG_FILE_SEPARATOR
+from habitat_lab.habitat.config.default import Config as CN
 
-from habitat_extensions.config.default import (
+from VLN_CE.habitat_extensions.config.default import (
     get_extended_config as get_task_config,
 )
 
@@ -306,7 +306,7 @@ def get_config(
         0.5]`. Argument can be used for parameter sweeping or quick tests.
     """
     config = CN()
-    config.merge_from_other_cfg(habitat_baselines.config.default._C)
+    config.merge_from_other_cfg(habitat_lab.habitat_baselines.config.default._C)
     purge_keys(config, ["SIMULATOR_GPU_ID", "TEST_EPISODE_COUNT"])
     config.merge_from_other_cfg(_C.clone())
 

@@ -2,10 +2,10 @@ from typing import Dict, List, Optional, Tuple, Union
 
 import networkx as nx
 import numpy as np
-from habitat.core.simulator import Simulator
-from habitat.core.utils import try_cv2_import
-from habitat.tasks.vln.vln import VLNEpisode
-from habitat.utils.visualizations import maps as habitat_maps
+from habitat_lab.habitat.core.simulator import Simulator
+from habitat_lab.habitat.core.utils import try_cv2_import
+from habitat_lab.habitat.tasks.vln.vln import VLNEpisode
+from habitat_lab.habitat.utils.visualizations import maps as habitat_maps
 
 cv2 = try_cv2_import()
 

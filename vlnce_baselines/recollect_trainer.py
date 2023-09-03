@@ -5,20 +5,20 @@ from typing import List
 
 import torch
 import tqdm
-from habitat import logger
-from habitat_baselines.common.baseline_registry import baseline_registry
-from habitat_baselines.common.obs_transformers import (
+from habitat_lab.habitat import logger
+from habitat_lab.habitat_baselines.common.baseline_registry import baseline_registry
+from habitat_lab.habitat_baselines.common.obs_transformers import (
     apply_obs_transforms_batch,
 )
-from habitat_baselines.common.tensorboard_utils import TensorboardWriter
-from habitat_baselines.rl.ddppo.algo.ddp_utils import is_slurm_batch_job
+from habitat_lab.habitat_baselines.common.tensorboard_utils import TensorboardWriter
+from habitat_lab.habitat_baselines.rl.ddppo.algo.ddp_utils import is_slurm_batch_job
 
-from vlnce_baselines.common.aux_losses import AuxLosses
-from vlnce_baselines.common.base_il_trainer import BaseVLNCETrainer
-from vlnce_baselines.common.recollection_dataset import (
+from VLN_CE.vlnce_baselines.common.aux_losses import AuxLosses
+from VLN_CE.vlnce_baselines.common.base_il_trainer import BaseVLNCETrainer
+from VLN_CE.vlnce_baselines.common.recollection_dataset import (
     TeacherRecollectionDataset,
 )
-from vlnce_baselines.dagger_trainer import collate_fn
+from VLN_CE.vlnce_baselines.dagger_trainer import collate_fn
 
 with warnings.catch_warnings():
     warnings.filterwarnings("ignore", category=FutureWarning)

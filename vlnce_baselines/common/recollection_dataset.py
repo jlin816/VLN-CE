@@ -6,17 +6,17 @@ import numpy as np
 import torch
 import tqdm
 from gym import Space
-from habitat.config.default import Config
-from habitat.sims.habitat_simulator.actions import HabitatSimActions
-from habitat_baselines.common.environments import get_env_class
-from habitat_baselines.common.obs_transformers import (
+from habitat_lab.habitat.config.default import Config
+from habitat_lab.habitat.sims.habitat_simulator.actions import HabitatSimActions
+from habitat_lab.habitat_baselines.common.environments import get_env_class
+from habitat_lab.habitat_baselines.common.obs_transformers import (
     apply_obs_transforms_obs_space,
     get_active_obs_transforms,
 )
 
-from habitat_extensions.task import ALL_ROLES_MASK, RxRVLNCEDatasetV1
-from vlnce_baselines.common.env_utils import construct_envs
-from vlnce_baselines.common.utils import extract_instruction_tokens
+from VLN_CE.habitat_extensions.task import ALL_ROLES_MASK, RxRVLNCEDatasetV1
+from VLN_CE.vlnce_baselines.common.env_utils import construct_envs
+from VLN_CE.vlnce_baselines.common.utils import extract_instruction_tokens
 
 
 class TeacherRecollectionDataset(torch.utils.data.IterableDataset):

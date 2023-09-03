@@ -1,15 +1,15 @@
 from typing import Any, Dict, Optional, Tuple, Union
 
-import habitat
+from habitat_lab import habitat
 import numpy as np
-from habitat import Config, Dataset
-from habitat.core.simulator import Observations
-from habitat.tasks.utils import cartesian_to_polar
-from habitat.utils.geometry_utils import quaternion_rotate_vector
-from habitat_baselines.common.baseline_registry import baseline_registry
+from habitat_lab.habitat import Config, Dataset
+from habitat_lab.habitat.core.simulator import Observations
+from habitat_lab.habitat.tasks.utils import cartesian_to_polar
+from habitat_lab.habitat.utils.geometry_utils import quaternion_rotate_vector
+from habitat_lab.habitat_baselines.common.baseline_registry import baseline_registry
 
-from habitat_extensions.discrete_planner import DiscretePathPlanner
-from habitat_extensions.utils import generate_video, navigator_video_frame
+from VLN_CE.habitat_extensions.discrete_planner import DiscretePathPlanner
+from VLN_CE.habitat_extensions.utils import generate_video, navigator_video_frame
 
 
 @baseline_registry.register_env(name="VLNCEDaggerEnv")
@@ -19,7 +19,7 @@ class VLNCEDaggerEnv(habitat.RLEnv):
 
     def get_reward_range(self) -> Tuple[float, float]:
         # We don't use a reward for DAgger, but the baseline_registry requires
-        # we inherit from habitat.RLEnv.
+        # we inherit from habitat_lab.habitat.RLEnv.
         return (0.0, 0.0)
 
     def get_reward(self, observations: Observations) -> float:
@@ -99,6 +99,7 @@ class VLNCEWaypointEnvDiscretized(VLNCEWaypointEnv):
         self.video_option = config.VIDEO_OPTION
         self.video_dir = config.VIDEO_DIR
         self.video_frames = []
+        import pdb; pdb.set_trace()
 
         step_size = config.TASK_CONFIG.SIMULATOR.FORWARD_STEP_SIZE
         self.discrete_planner = DiscretePathPlanner(

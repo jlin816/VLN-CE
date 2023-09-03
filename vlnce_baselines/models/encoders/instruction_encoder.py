@@ -3,8 +3,8 @@ import json
 
 import torch
 import torch.nn as nn
-from habitat import Config
-from habitat.core.simulator import Observations
+from habitat_lab.habitat import Config
+from habitat_lab.habitat.core.simulator import Observations
 from torch import Tensor
 
 
@@ -75,7 +75,7 @@ class InstructionEncoder(nn.Module):
             instruction = observations["rxr_instruction"]
 
         lengths = (instruction != 0.0).long().sum(dim=2)
-        lengths = (lengths != 0.0).long().sum(dim=1).cpu()
+        lengths = (lengths != 0.0).long().sum(dim=1)
 
         packed_seq = nn.utils.rnn.pack_padded_sequence(
             instruction, lengths, batch_first=True, enforce_sorted=False

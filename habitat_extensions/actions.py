@@ -2,11 +2,11 @@ from typing import Any
 
 import numpy as np
 from gym import spaces
-from habitat.core.registry import registry
-from habitat.core.simulator import Observations
-from habitat.tasks.nav.nav import TeleportAction
+from habitat_lab.habitat.core.registry import registry
+from habitat_lab.habitat.core.simulator import Observations
+from habitat_lab.habitat.tasks.nav.nav import TeleportAction
 
-from habitat_extensions.utils import (
+from VLN_CE.habitat_extensions.utils import (
     compute_heading_to,
     rtheta_to_global_coordinates,
 )
